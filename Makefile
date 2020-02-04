@@ -5,7 +5,7 @@
 include $(TOPDIR)/config.mk
 
 LIB   = libuecc.a
-OBJS += uECC.c
+OBJS += uECC.o
 
 all:    $(LIB)
 

@@ -32,9 +32,9 @@ static int default_RNG(uint8_t *dest, unsigned size) {
     (defined(__APPLE__) && defined(__MACH__)) || defined(uECC_POSIX)
 
 /* Some POSIX-like system with /dev/urandom or /dev/random. */
-#include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <linux/types.h>
+//#include <fcntl.h>
+//#include <unistd.h>
 
 #ifndef O_CLOEXEC
     #define O_CLOEXEC 0
@@ -48,7 +48,7 @@ static int default_RNG(uint8_t *dest, unsigned size) {
             return 0;
         }
     }
-    
+
     char *ptr = (char *)dest;
     size_t left = size;
     while (left > 0) {
@@ -60,7 +60,7 @@ static int default_RNG(uint8_t *dest, unsigned size) {
         left -= bytes_read;
         ptr += bytes_read;
     }
-    
+
     close(fd);
     return 1;
 }
